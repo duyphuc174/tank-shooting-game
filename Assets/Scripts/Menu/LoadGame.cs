@@ -14,10 +14,6 @@ public class LoadGame : MonoBehaviour
         SceneManager.LoadScene("SampleScene");
     }
 
-    public void ReadStringInput()
-    {
-        nameInput = inputField.text;
-    }
 
     public void Quit()
     {
