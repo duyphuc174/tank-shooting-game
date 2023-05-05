@@ -116,11 +116,12 @@ GameObject:
   - component: {fileID: 5488873708426520541}
   - component: {fileID: 5488873708426520540}
   - component: {fileID: 5488873708426520543}
+  - component: {fileID: 847927444414178026}
   - component: {fileID: 5488873708426520542}
   - component: {fileID: 5488873708426520546}
   m_Layer: 0
   m_Name: Enemy_fly 1
-  m_TagString: Enemy_fly
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,10 +171,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roaming: 0
-  moveSpeed: 3
+  moveSpeed: 1
   nextWPDistance: 0.3
   seeker: {fileID: 5488873708426520542}
   updateContinuesPath: 1
+--- !u!114 &847927444414178026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5488873708426520537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff97d6db30e311642a375158c2a4b61b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  genericEffect: {fileID: 418056051757317517, guid: 30895994812832e4494c8f6adaec1dcc, type: 3}
+  damage: 30
+  tank: {fileID: 0}
+  exp: 10
 --- !u!114 &5488873708426520542
 MonoBehaviour:
   m_ObjectHideFlags: 0

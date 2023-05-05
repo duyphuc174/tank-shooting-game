@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BulletCollision : MonoBehaviour
 {
+    public GameObject genericEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,9 +19,11 @@ public class BulletCollision : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if(collision.CompareTag("Enemy_fly")) 
+		if(collision.CompareTag("Enemy")) 
         {
-            Destroy(collision.gameObject);
+			Instantiate(genericEffect, collision.transform.position, Quaternion.identity);
+			Destroy(collision.gameObject);
+            Destroy(this.gameObject);
         }
 	}
 }

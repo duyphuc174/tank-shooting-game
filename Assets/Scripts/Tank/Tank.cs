@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class Tank : MonoBehaviour
 {
-    public float moveSpeed = 10f;
-    public float currentAngle = 0f;
+    public float moveSpeed = 3f;
+    public int maxLevel = 10;
+    public int level = 1;
+    public int maxHealth;
+    public int health;
+    public int maxExp;
+    public int exp = 0;
+    public int damageDefend = 100;
 
-    public SpriteRenderer tankCharacter;
+    UIManager ui;
 
     public Vector3 moveInput;
 
@@ -16,14 +22,47 @@ public class Tank : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
+        ui = FindObjectOfType<UIManager>();
+        UpdateMaxExp();
+        UpDateMaxHealth();
+        health = maxHealth;
 		rb = GetComponent<Rigidbody2D>();
 		transform.localScale = new Vector3(-1f, 1f, 1f);
 	}
+
 
     // Update is called once per frame
     void Update()
     {
         Move();
+        LevelUp();
+    }
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if(collision.gameObject.CompareTag("Enemy"))
+        {
+			Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+			if (enemy != null)
+			{
+				enemy.TakeDamage(damageDefend);
+                this.TakeDamage(enemy.damage);
+			}
+		}
+	}
+	private void UpdateMaxExp()
+    {
+        maxExp = 100 * level;
+    }
+
+    private void UpDateMaxHealth()
+    {
+        maxHealth = 100 * level;
+    }
+
+    private void IncreaseSpeed()
+    {
+        moveSpeed += 0.5f;
     }
 
     private void Move()
@@ -48,4 +87,47 @@ public class Tank : MonoBehaviour
 		transform.rotation = rotation;
         
 	}
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        ui.SetHealthText("HP: " + health.ToString() + "/" + maxHealth.ToString());
+        if(health <= 0)
+        {
+            GameOver();
+        }
+    }
+
+    public void GameOver()
+    {
+        ui.ShowGameOverPanel(true);
+    }
+
+    public void LevelUp()
+    {
+        if(level >= maxLevel)
+        {
+            return;
+        }
+        if(exp >= maxExp)
+        {
+            level++;
+            exp -= maxExp;
+            UpdateMaxExp();
+            UpDateMaxHealth();
+            IncreaseSpeed();
+            ui.SetLevelText("Level: " + level.ToString());
+		}
+    }
+
+    public void IncreaseExp(int _exp)
+    {
+        if(exp >= maxExp)
+        {
+            exp = maxExp;
+            return;
+        }
+        exp += _exp;
+        ui.SetExpText("Exp: " + exp.ToString() + "/" + maxExp.ToString());
+    }
 }

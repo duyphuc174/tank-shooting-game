@@ -11,8 +11,6 @@ public class GameController : MonoBehaviour
 
     float m_spawnTime;
 
-    int m_score;
-
     bool isGameOver;
 
     public float maxBackgroundX = 40;
@@ -45,21 +43,6 @@ public class GameController : MonoBehaviour
             Instantiate(enemy, spawnPos1, Quaternion.identity);
             Instantiate(enemy, spawnPos2, Quaternion.identity);
 		}
-    }
-
-    public void SetCore(int val) 
-    {
-        m_score = val;
-    }
-
-    public int GetScore()
-    {
-        return m_score;
-    }
-
-    public void ScoreIncrement()
-    {
-        m_score++;
     }
 
     public void SetGameOverState(bool state)
