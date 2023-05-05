@@ -14,6 +14,11 @@ public class LoadGame : MonoBehaviour
         SceneManager.LoadScene("SampleScene");
     }
 
+    public void loadMenu()
+    {
+
+    }
+
 
     public void Quit()
     {
